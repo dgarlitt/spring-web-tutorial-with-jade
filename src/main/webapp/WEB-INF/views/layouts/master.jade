@@ -1,0 +1,23 @@
+!!! 5
+html
+  head
+    meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='description', content='')
+    meta(name='author', content='Simplicity Itself')
+    title Yummy Noodle Bar
+    link(href='/resources/css/bootstrap.min.css', rel='stylesheet')
+    style(type='text/css')
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+        .sidebar-nav {
+        padding: 9px 0;
+      }
+    link(href='/resources/css/bootstrap-responsive.min.css', rel='stylesheet')
+  body
+    div
+      include ../common/head.jade
+
+    block content

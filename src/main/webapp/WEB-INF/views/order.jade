@@ -1,0 +1,24 @@
+extends ./layouts/master.jade
+
+block content
+  .container-fluid
+    .hero-unit
+        h3 Your order is confirmed
+        p
+          a.btn.btn-primary.btn-large(href='/') Please can I have some more
+          a.btn.btn-primary.btn-large(href='/order/#{orderStatus.getOrderId()}')
+            | Get latest status
+      .row-fluid.sidebar-nav
+        .span8
+          p.text-info
+            span #{orderStatus.getName()},
+            | Thanks for your order
+          p.text-info
+            | Your order number is
+            span #{orderStatus.getOrderId()}
+          p.text-info The estimate for cooking is 20 minutes
+          p.text-success
+            | The status is currently
+            span #{orderStatus.getStatus()}
+      div
+        include ./common/foot.jade

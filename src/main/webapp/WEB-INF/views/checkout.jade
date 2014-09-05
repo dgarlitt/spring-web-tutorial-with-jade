@@ -1,0 +1,42 @@
+extends ./layouts/master.jade
+
+block content
+  errors = customerInfo.getErrors()
+  .container-fluid
+    div
+      include ./common/left.jade
+    .hero-unit.span9
+      h3 Where do we deliver your Order?
+      p
+        a.btn.btn-primary.btn-large(href='/showBasket') Back to basket
+    .row-fluid
+      if message
+        #message.alert.alert-info #{message}
+      form.span9(method='POST')
+        if errors.name
+          nameErr = "error"
+        div(class="control-group #{nameErr}")
+          label.control-label(for='name') Name:
+            .controls
+              input#name.input-xxlarge(type='text', name="name", value="#{customerInfo.getName()}")
+              if errors.name
+                span.help-inline Required
+        if errors.address1
+          addrErr = "error"
+        div(class="control-group #{addrErr}")
+          label.control-label(for='address1') Address:
+            .controls
+              input#address1.input-xxlarge(type='text', name="address1", value="#{customerInfo.getAddress1()}")
+              if errors.address1
+                span.help-inline Required
+        if errors.postcode
+          postErr = "error"
+        div(class="control-group #{postErr}")
+          label.control-label(for='postcode') Postal Code:
+            .controls
+              input#postcode.input-xxlarge(type='text', name="postcode", value="#{customerInfo.getPostcode()}")
+              if errors.postcode
+                span.help-inline Required
+        input.btn.btn-primary(type='submit', value='Place order')
+      div
+        include ./common/foot.jade

@@ -1,0 +1,35 @@
+extends ./layouts/master.jade
+
+block content
+  .container-fluid
+      div
+        include ./common/left.jade
+        .hero-unit.span9
+          h3 Basket
+          p
+            a.btn.btn-primary.btn-large(href='/') Continue eating
+            if basket.getSize() > 0
+              a.btn.btn-primary.btn-large(href='/checkout') Go ahead and order
+        .row-fluid
+          .span8
+            table.table.table-striped
+              thead
+                tr
+                  th ID
+                  th Name
+                  th Cost
+                  th Mins to prepare
+                  th Action
+              tbody
+                each basketItem in basket.items
+                  tr
+                    td #{basketItem.getId()}
+                    td #{basketItem.getName()}
+                    td #{basketItem.getCost()}
+                    td #{basketItem.getMinutesToPrepare()}
+                    td
+                      form(action='/removeFromBasket', method='POST')
+                        input#id(name='id', type='hidden', value='#{basketItem.getId()}')
+                        input(type='submit', value='Remove')
+            div
+              include ./common/foot.jade

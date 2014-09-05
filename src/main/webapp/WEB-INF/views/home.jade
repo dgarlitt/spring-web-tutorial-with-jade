@@ -1,0 +1,44 @@
+extends ./layouts/master.jade
+
+block content
+  .container-fluid
+    div
+      include ./common/left.jade
+    .hero-unit.span9
+      h3 Yummy
+      p
+        | Welcome to the home of all things Noodle
+      p
+        a.btn.btn-primary.btn-large(href='http://spring.io/') Learn more about Spring
+        if basket.getSize() > 0
+          a.btn.btn-primary.btn-large(href='/showBasket') Look in your basket
+    .row-fluid
+      .span9
+        #message.alert.alert-info
+          | Select from the menu. Currently your basket contains
+          em #{basket.getSize()}&nbsp;
+          | truly scrumptious item(s).
+        table.table.table-striped
+          thead
+            tr
+              th ID
+              th Name
+              th Cost
+              th Mins to prepare
+              th Action
+          tbody
+            each item,status in menuItems
+              tr
+                td #{item.id}
+                td #{item.name}
+                td #{item.cost}
+                td #{item.minutesToPrepare}
+                td
+                  form(action='/addToBasket', method='POST')
+                    input#id(name='id', type='hidden', value='#{item.id}')
+                    input#name(name='name', type='hidden', value='#{item.name}')
+                    input#cost(name='cost', type='hidden', value='#{item.cost}')
+                    input#minutesToPrepare(name='minutesToPrepare', type='hidden', value='#{item.minutesToPrepare}')
+                    input(type='submit', value='Add to basket')
+        div
+          include ./common/foot.jade
